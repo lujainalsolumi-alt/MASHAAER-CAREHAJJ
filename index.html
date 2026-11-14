@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MASHAAER CARE | Prototype</title>
+<style>
+:root{--red:#851827;--red2:#a92b3b;--ink:#24252b;--muted:#777d87;--bg:#f5f6f8;--line:#e8e9ed;--green:#23845a;--amber:#b77b17}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Tahoma,Arial,sans-serif;color:var(--ink)}
+button{font:inherit;cursor:pointer;border:0}.app{min-height:100vh;max-width:1500px;margin:auto;display:flex;flex-direction:column;background:var(--bg)}
+.topbar{height:76px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 25px;position:sticky;top:0;z-index:5}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:43px;height:43px;border-radius:13px;background:var(--red);color:#fff;display:grid;place-items:center;font-size:23px}.brand h1{font-size:17px;margin:0;letter-spacing:.4px}.brand small{display:block;color:var(--muted);font-size:11px;margin-top:4px}.status{background:#e7f5ed;color:var(--green);padding:7px 12px;border-radius:30px;font-size:12px}
+.layout{display:flex;flex:1}.sidebar{width:92px;background:var(--red);padding:20px 10px;display:flex;flex-direction:column;gap:13px;min-height:calc(100vh - 76px)}.nav{color:#fff;background:transparent;border-radius:12px;padding:12px 4px;display:flex;flex-direction:column;align-items:center;gap:7px;font-size:11px;opacity:.9}.nav .ico{font-size:21px}.nav.active,.nav:hover{background:#ffffff24;opacity:1}
+main{padding:26px;width:100%;max-width:1350px;margin:auto}.pagehead{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}.pagehead h2{font-size:23px;margin:0 0 6px}.pagehead p{margin:0;color:var(--muted);font-size:13px}.avatar{background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px;font-size:20px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}.stat,.panel,.alert-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px}.stat span{font-size:12px;color:var(--muted)}.stat strong{display:block;font-size:26px;margin-top:8px}.danger-text{color:var(--red2)}.mapgrid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(290px,.9fr);gap:17px}.panel h3{margin:0 0 14px;font-size:16px}.legend{display:flex;gap:15px;flex-wrap:wrap;margin-bottom:14px;color:#626873;font-size:11px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-left:5px}.maparea{background:#edf1e9;border-radius:14px;padding:16px;display:grid;gap:12px}.zone{background:#fff9;border:1px solid #e0e6dc;border-radius:12px;padding:12px}.zone h4{text-align:center;margin:0 0 12px;color:#56634f;font-size:13px}.poles{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.pole{background:#e4f3e9;color:#287a50;border:1px solid #cce6d5;border-radius:10px;padding:9px 12px;min-width:62px;font-weight:bold}.pole.alert{background:#fbe5e7;color:#a32635;border-color:#efc4c9}.pole.watch{background:#fff1d9;color:#956515;border-color:#f0dfb9}.pole.selected{outline:3px solid #8f182833}.hint{font-size:11px;color:var(--muted);text-align:center;margin:12px 0 0}.tag{display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border-radius:30px;font-size:11px;font-weight:bold}.tag.red{background:#fdebed;color:#ad2636}.tag.amber{background:#fff2dc;color:#956515}.tag.green{background:#e7f5ed;color:#23845a}.source{display:flex;align-items:center;gap:9px;font-weight:bold;margin:13px 0;font-size:14px}.source .symbol{font-size:22px}.details{display:grid;gap:11px;margin:14px 0}.detail{display:flex;justify-content:space-between;gap:12px;font-size:12px}.detail span:first-child{color:var(--muted)}.detail b{text-align:left}.btn{width:100%;padding:12px;border-radius:10px;background:var(--red);color:#fff;font-weight:bold}.btn:hover{background:var(--red2)}.btn.outline{background:#fff;color:var(--red);border:1px solid #d9b7bc}.notice{font-size:11px;color:var(--muted);line-height:1.7;margin-top:12px}.switches{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.switch{padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:#fff;color:#4e535c;font-size:12px}.switch.active{background:#fbe9eb;color:var(--red);border-color:#e8c3c8;font-weight:bold}.alert-list{display:grid;gap:12px}.alert-card{padding:16px}.alert-card h3{margin:0 0 8px;font-size:15px}.alert-card p{font-size:12px;color:var(--muted);margin:7px 0}.alert-card .btn{margin-top:12px}.profile{max-width:650px}.profile .detail{padding:10px 0;border-bottom:1px solid var(--line)}.crowd-level{height:10px;background:#f3e6cf;border-radius:20px;overflow:hidden;margin:12px 0}.crowd-level i{display:block;width:78%;height:100%;background:#d49a35;border-radius:20px}.footer{text-align:center;color:#9297a0;font-size:10px;margin-top:22px}
+@media(max-width:850px){.mapgrid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}main{padding:17px}.topbar{padding:0 15px}}
+@media(max-width:560px){.sidebar{width:66px;padding:12px 6px}.nav{font-size:9px;padding:10px 2px}.topbar{height:66px}.brand h1{font-size:14px}.stats{gap:8px}.stat{padding:12px}.stat strong{font-size:21px}.pagehead h2{font-size:19px}.layout{min-height:calc(100vh - 66px)}main{padding:13px}.detail{font-size:11px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="brand"><div class="logo">♥</div><div><h1>MASHAAER CARE</h1><small>Emergency & Patient Monitoring</small></div></div>
+  <div class="status">● النظام متصل · نسخة تجريبية</div>
+</header>
+<div class="layout">
+  <aside class="sidebar">
+    <button class="nav active" data-page="map"><span class="ico">⌖</span>الخريطة</button>
+    <button class="nav" data-page="patient"><span class="ico">♙</span>My Patient</button>
+    <button class="nav" data-page="alerts"><span class="ico">♧</span>الطوارئ</button>
+    <button class="nav" data-page="crowds"><span class="ico">♧</span>التكدس</button>
+  </aside>
+  <main id="main"></main>
+</div>
+</div>
+<script>
+const state={page:"map",selected:"214",source:"fall",claimed:{}};
+const poleData={
+ "214":{source:"fall",area:"منى – منطقة الجمرات",type:"اكتشاف حالة سقوط",origin:"كاميرا المراقبة",condition:"اكتشاف سقوط بواسطة نظام الرصد البصري",patient:"لا تتوفر بيانات طبية تلقائيًا"},
+ "218":{source:"watch",area:"منى – منطقة الجمرات",type:"بلاغ من ساعة المريض",origin:"الساعة الصحية المرتبطة بالمريض",condition:"تنبيه في المؤشرات القلبية",patient:"أحمد محمد – مريض مسجل (بيانات تجريبية)"},
+ "202":{source:"crowd",area:"مزدلفة",type:"تنبيه كثافة حشود",origin:"تحليل بيانات العمود",condition:"ارتفاع في كثافة الحشود",patient:"لا ينطبق"}
+};
+function setPage(page){state.page=page;document.querySelectorAll(".nav").forEach(b=>b.classList.toggle("active",b.dataset.page===page));render()}
+document.querySelectorAll(".nav").forEach(b=>b.addEventListener("click",()=>setPage(b.dataset.page)));
+function selectPole(id){state.selected=id;state.source=poleData[id]?.source||"none";render()}
+function claim(id){state.claimed[id]=true;render()}
+function badgeFor(source){return source==="fall"?'<span class="tag red">اكتشاف حالة سقوط</span>':source==="watch"?'<span class="tag amber">بلاغ من ساعة المريض</span>':'<span class="tag amber">تكدس مرتفع</span>'}
+function detailsCard(id){const p=poleData[id];if(!p)return `<div class="panel"><h3>العمود رقم ${id}</h3><span class="tag green">لا توجد حالة طارئة مسجلة</span></div>`;
+return `<div class="panel"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><h3>تفاصيل العمود رقم ${id}</h3>${badgeFor(p.source)}</div>
+<div class="source"><span class="symbol">${p.source==="fall"?"📹":p.source==="watch"?"⌚":"👥"}</span>${p.type}</div>
+<div class="details">
+<div class="detail"><span>الموقع</span><b>${p.area}</b></div>
+<div class="detail"><span>مصدر البلاغ</span><b>${p.origin}</b></div>
+<div class="detail"><span>الحالة</span><b>${p.condition}</b></div>
+<div class="detail"><span>بيانات المريض</span><b>${p.patient}</b></div>
+</div>
+${state.claimed[id]?'<span class="tag green">✓ تم استلام الحالة تجريبيًا</span>':`<button class="btn" onclick="claim('${id}')">تولي الحالة</button>`}
+<div class="notice">تنبيه: بيانات هذه الحالة افتراضية. لا يتصل هذا النموذج بكاميرات أو ساعات صحية فعلية.</div></div>`}
+function renderMap(){return `<div class="pagehead"><div><h2>خريطة المشاعر</h2><p>نظام المتابعة والاستجابة الطبية</p></div><div class="avatar">♙</div></div>
+<div class="stats"><div class="stat"><span>إجمالي الأعمدة</span><strong>128</strong></div><div class="stat"><span>بلاغات طارئة تجريبية</span><strong class="danger-text">02</strong></div><div class="stat"><span>تنبيهات التكدس</span><strong style="color:var(--amber)">01</strong></div></div>
+<div class="mapgrid"><section class="panel"><h3>خريطة مواقع الأعمدة</h3><div class="legend"><span><i class="dot" style="background:#299d69"></i>عمود سليم</span><span><i class="dot" style="background:#d32f3f"></i>حالة طارئة</span><span><i class="dot" style="background:#e5a52b"></i>تكدس</span></div>
+<div class="maparea">
+${zone("عرفات",["101","102","103"])}${zone("مزدلفة",["201","202","203"])}${zone("منى",["211","212","213"])}${zone("منطقة الجمرات",["214","218","216"])}
+</div><p class="hint">اضغط على رقم أي عمود لعرض تفاصيله. هذه خريطة تخطيطية وليست خريطة جغرافية معتمدة.</p></section>
+<div id="selected-details">${detailsCard(state.selected)}</div></div>`}
+function zone(name,ids){return `<div class="zone"><h4>${name}</h4><div class="poles">${ids.map(id=>{let cls=id==="214"?"alert":id==="218"?"watch":id==="202"?"watch":"";return `<button class="pole ${cls} ${state.selected===id?"selected":""}" onclick="selectPole('${id}')">${id}${id==="214"?" · 📹":id==="218"?" · ⌚":id==="202"?" · !":""}</button>`}).join("")}</div></div>`}
+function renderAlerts(){return `<div class="pagehead"><div><h2>الإشعارات الطارئة</h2><p>بلاغات من مصادر الرصد المختلفة</p></div></div><div class="alert-list">
+${alertCard("214","fall","📹","اكتشاف حالة سقوط","كاميرا المراقبة","منى – منطقة الجمرات","اكتشاف سقوط بواسطة نظام الرصد البصري")}
+${alertCard("218","watch","⌚","بلاغ من ساعة المريض","الساعة الصحية المرتبطة بالمريض","منى – منطقة الجمرات","تنبيه في المؤشرات القلبية")}
+</div>`}
+function alertCard(id,source,icon,title,origin,area,condition){return `<div class="alert-card"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><h3>بلاغ العمود رقم ${id}</h3>${badgeFor(source)}</div><div class="source"><span class="symbol">${icon}</span>${title}</div><p>الموقع: ${area}</p><p>مصدر البلاغ: ${origin}</p><p>الحالة: ${condition}</p>${state.claimed[id]?'<span class="tag green">تم استلام الحالة تجريبيًا</span>':`<button class="btn" onclick="claim('${id}')">تولي الحالة</button>`}<button class="btn outline" style="margin-top:8px" onclick="state.selected='${id}';setPage('map')">عرض على الخريطة</button></div>`}
+function renderPatient(){return `<div class="pagehead"><div><h2>My Patient</h2><p>ملف المريض المرتبط بالساعة الصحية</p></div></div><div class="panel profile"><div class="source">♙ معلومات المريض</div><div class="details"><div class="detail"><span>اسم المريض</span><b>أحمد محمد</b></div><div class="detail"><span>المرض المزمن</span><b>مرض قلبي مزمن</b></div><div class="detail"><span>العمود المرتبط</span><b>218 – منى</b></div><div class="detail"><span>المسعف المسؤول</span><b>المسعف المناوب</b></div><div class="detail"><span>حالة الربط</span><b>ساعة صحية مرتبطة (تجريبي)</b></div></div><span class="tag green">ملف تجريبي</span><p class="notice">تُعرض المعلومات الصحية للمسعفين المخولين فقط في النظام الفعلي، وفق صلاحيات الوصول وموافقة المريض.</p></div>`}
+function renderCrowds(){return `<div class="pagehead"><div><h2>أماكن التكدس</h2><p>متابعة كثافة الحجاج حول الأعمدة</p></div></div><div class="panel profile"><h3>العمود 202 · مزدلفة</h3><span class="tag amber">ارتفاع في كثافة الحشود – تجريبي</span><div class="crowd-level"><i></i></div><p style="font-size:12px;color:var(--muted)">مؤشر كثافة توضيحي فقط، وليس قراءة حقيقية من الكاميرات.</p><button class="btn outline" onclick="state.selected='202';setPage('map')">عرض العمود على الخريطة</button></div>`}
+function render(){const main=document.getElementById("main");main.innerHTML=state.page==="map"?renderMap():state.page==="alerts"?renderAlerts():state.page==="patient"?renderPatient():renderCrowds()}
+render();
+</script>
+</body>
+</html>
